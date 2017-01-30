@@ -1,8 +1,10 @@
 from tkinter import *
 from tkinter import ttk
+import os
+
 # makes window
 root = Tk()
-root.title("To Do List")
+root.title("MUSIC PAD")
 n = ttk.Notebook(root)
 n.grid()
 
@@ -12,9 +14,41 @@ f2 = ttk.Frame(n)   # second page
 n.add(f1, text='MUSIC')
 n.add(f2, text='PAD')
 #music
+dirL=ttk.Label(f1,text='DIRECTIONS:CREATE FOLDER OUTSIDE OF PROGRAM AND ADD .MP3 FILES TO IT')
+dirL.grid()
+addL=ttk.Label(f1,text='FIND THE MP3 FILES')
+addL.grid()
 
+song_dir_list=[]
+def open_():
+        root.fileName = filedialog.askopenfilename(filetypes=(("*","*.mp3"),("*","*.mp3")))
+        song_dir=(root.fileName)
+        global song_dir_list
+        song_dir_list=song_dir_list+[song_dir]
+
+
+openB=ttk.Button(f1,text="OPEN",command=open_)
+openB.grid()
+
+def all_():
+    for song in song_dir_list:
+        checkB=ttk.Checkbutton(f1,text=song)
+        checkB.state(['!alternate'])
+        checkB.grid()
+
+def play_():
+    pass
+playB=ttk.Button(f1,text="PLAY",command=play_)        
+sorryL=ttk.Label(f1,text="SORRY FOR THE WAY IT LOOKS, MAYBE IN THE NEXT UPDATE!!")
+advisedL=ttk.Label(f1,text="IT IS ADVISED TO CHECK ONE AT A TIME :)")
+allB=ttk.Button(f1,text="SEE ALL",command= all_)
+playB.grid()
+allB.grid()
+sorryL.grid()
+advisedL.grid()
 
 #pad
+
 # functions that will later be called
 disclaimer = Label(f2,text="IF CLEAR ALL DOESNT CLEAR PRESS AGAIN")
 w = Label(f2, text="Make new To-Do")
@@ -54,6 +88,3 @@ clearB.grid()
 disclaimer.grid()
 
 root.mainloop()
-
-
-
