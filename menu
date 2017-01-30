@@ -1,5 +1,59 @@
-n = ttk.Notebook(parent)
+from tkinter import *
+from tkinter import ttk
+# makes window
+root = Tk()
+root.title("To Do List")
+n = ttk.Notebook(root)
+n.grid()
+
 f1 = ttk.Frame(n)   # first page, which would get widgets gridded into it
 f2 = ttk.Frame(n)   # second page
-n.add(f1, text='One')
-n.add(f2, text='Two')
+
+n.add(f1, text='MUSIC')
+n.add(f2, text='PAD')
+#music
+
+
+#pad
+# functions that will later be called
+disclaimer = Label(f2,text="IF CLEAR ALL DOESNT CLEAR PRESS AGAIN")
+w = Label(f2, text="Make new To-Do")
+w.columnconfigure(0,weight=0)
+w.grid(row=0, column=0,sticky=W+E+N+S,padx=5, pady=5)
+blank = ttk.Entry(f2)
+blank.grid(row=2,column=0)
+def X():
+    blank.delete(0, 'end')
+XB = ttk.Button(f2, text="X", command=X)
+XB.grid(row=2,column=1)
+# make this be able to work on some buttons not all
+buttons=[]
+def print_list():
+    words = (blank.get())
+    checkB = ttk.Checkbutton(f2, text=words)
+    checkB.state(['!alternate'])
+    checkB.grid()
+    global check
+    buttons.append(checkB)
+createB = ttk.Button(f2, text="CREATE", command=print_list)
+createB.grid()
+def clear():
+    for button in buttons:
+        if button.instate(['selected']):
+            checked=[button]
+            for idk in checked:
+                idk.destroy()
+                buttons.remove(idk) 
+def check():
+    for button in buttons:
+        button.state(['selected'])
+checkall=ttk.Button(f2,text =" CHECK ALL", command=check)
+checkall.grid()
+clearB = ttk.Button(f2, text="CLEAR ALL CHECKED", command=clear)
+clearB.grid()
+disclaimer.grid()
+
+root.mainloop()
+
+
+
