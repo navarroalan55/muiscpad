@@ -78,7 +78,8 @@ uncheck.grid()
 clearB.grid()
 sorryL.grid()
 advisedL.grid()
-
+disclaimer = Label(f1,text="IF CLEAR ALL DOESNT CLEAR PRESS AGAIN")
+disclaimer.grid()
 #pad
 
 # functions that will later be called
@@ -128,3 +129,8 @@ clearB.grid()
 disclaimer.grid()
 
 root.mainloop()
+
+
+
+
+
