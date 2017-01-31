@@ -29,21 +29,53 @@ def open_():
 
 openB=ttk.Button(f1,text="OPEN",command=open_)
 openB.grid()
-
+songs=[]
 def all_():
     for song in song_dir_list:
         checkB=ttk.Checkbutton(f1,text=song)
         checkB.state(['!alternate'])
         checkB.grid()
+        global songs
+        songs.append(checkB)
 
 def play_():
-    pass
+    for song in songs:
+            if song.instate(['selected']):
+                    checked=[song]
+                    for song in checked:
+                            directory=song.cget("text")
+                            os.startfile(directory)
+
+
+def clear():
+        for button in songs:
+                if button.instate(['selected']):
+                        checked=[button]
+                        for idk in checked:
+                                idk.destroy()
+                                songs.remove(idk)    
+
+
 playB=ttk.Button(f1,text="PLAY",command=play_)        
 sorryL=ttk.Label(f1,text="SORRY FOR THE WAY IT LOOKS, MAYBE IN THE NEXT UPDATE!!")
-advisedL=ttk.Label(f1,text="IT IS ADVISED TO CHECK ONE AT A TIME :)")
+advisedL=ttk.Label(f1,text="IT IS ADVISED TO CHECK ONE AT A TIME  TO PLAY THE SONG :)")
+clearB = ttk.Button(f1, text="CLEAR ALL CHECKED", command=clear)
 allB=ttk.Button(f1,text="SEE ALL",command= all_)
 playB.grid()
 allB.grid()
+
+def check():
+    for button in  songs:
+        button.state(['selected'])
+
+def uncheckall():
+        for button in songs:
+                button.state(['!selected'])
+checkall=ttk.Button(f1,text =" CHECK ALL", command=check)
+uncheck=ttk.Button(f1,text="UNCHECK ALL" ,command=uncheckall)
+checkall.grid()
+uncheck.grid()
+clearB.grid()
 sorryL.grid()
 advisedL.grid()
 
@@ -82,8 +114,16 @@ def check():
     for button in buttons:
         button.state(['selected'])
 checkall=ttk.Button(f2,text =" CHECK ALL", command=check)
-checkall.grid()
+
 clearB = ttk.Button(f2, text="CLEAR ALL CHECKED", command=clear)
+
+def uncheckall():
+        for button in buttons:
+                button.state(['!selected'])
+
+uncheck=ttk.Button(f2,text="UNCHECK ALL" ,command=uncheckall)
+checkall.grid()
+uncheck.grid()
 clearB.grid()
 disclaimer.grid()
 
